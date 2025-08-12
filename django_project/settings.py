@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
-from dotenv import load_dotenv
-load_dotenv()  # Loads variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,12 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY =  'django-insecure-3j^*2#0er=f-td3j^y^da^696#83c2&ol71t9aj$4^g_+d)#l^'
+# SECRET_KEY = os.environ.get('SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', '0') == '1'  # Defaults to False (0) if not set
+DEBUG = True  # Defaults to False (0) if not set
+# DEBUG = os.environ.get('DEBUG', '0') == '1'  # Defaults to False (0) if not set
 
-ALLOWED_HOSTS = ['jasonacharya.pythonanywhere.com'] if 'PYTHONANYWHERE_DOMAIN' in os.environ else []
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,17 +81,6 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
-    }
-} if 'PYTHONANYWHERE_DOMAIN' in os.environ else {
-    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
@@ -127,22 +116,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Cloudinary (production only)
-if 'PYTHONANYWHERE_DOMAIN' in os.environ:
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-        'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-        'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
-    }
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For collectstatic
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
