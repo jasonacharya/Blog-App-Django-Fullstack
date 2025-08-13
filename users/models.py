@@ -10,13 +10,14 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile" 
     
-    # Function for resizing the user profile picture
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
+    #**** Function for resizing the user's profile picture ****#
+    #**** Commented for deployment due to issues ****#
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
         
-        img = Image.open(self.image.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-        
+    #     img = Image.open(self.image.path)
+    #     if img.height > 300 or img.width > 300:
+    #         output_size = (300, 300)
+    #         img.thumbnail(output_size)
+    #         img.save(self.image.path)
+    
